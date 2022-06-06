@@ -1,8 +1,8 @@
 name: magic_dropdown
 description: A flutter widget with highly customizable dropdown options.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
+homepage: https://github.com/Bassiuz/magic_dropdown/
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
