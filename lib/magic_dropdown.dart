@@ -189,7 +189,8 @@ class _MagicDropdownState extends State<MagicDropdown>
   OverlayEntry? createClickDetector() {
     return OverlayEntry(
         builder: (context) => Positioned(
-                child: GestureDetector(
+            key: const Key("outside_click_detector"),
+            child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTapDown: (details) async {
                 await _closeMenu();
