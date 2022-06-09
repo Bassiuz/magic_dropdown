@@ -21,7 +21,8 @@ class MagicDropdown extends StatefulWidget {
       this.animationDuration = const Duration(milliseconds: 1),
       this.onSingleValueSelected,
       this.onMultiValueSelected,
-      this.dropdownMode = DropdownMode.customChild})
+      this.dropdownMode = DropdownMode.customChild,
+      this.customButton})
       : super(key: key);
   final Widget? child;
   final double? customWidth;
@@ -32,6 +33,7 @@ class MagicDropdown extends StatefulWidget {
   final List<String> selectedValues;
   final void Function(String)? onSingleValueSelected;
   final void Function(List<String>)? onMultiValueSelected;
+  final Widget? customButton;
 
   final DropdownMode dropdownMode;
 
@@ -169,10 +171,11 @@ class MagicDropdownState extends State<MagicDropdown>
         link: _layerLink,
         child: Container(
           key: _globalKey,
-          child: MagicDropdownButton(
-            filterTitle: widget.filterTitle,
-            animationController: animationController,
-          ),
+          child: widget.customButton ??
+              MagicDropdownButton(
+                filterTitle: widget.filterTitle,
+                animationController: animationController,
+              ),
         ),
       ),
     );

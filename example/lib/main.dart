@@ -197,6 +197,43 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Center(
               child: MagicDropdown(
+                filterTitle: "Custom child and custom button",
+                customButton: Card(
+                  child: Container(
+                    decoration: const BoxDecoration(color: Colors.amber),
+                    child: const Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: Text("Custom child and custom button"),
+                    ),
+                  ),
+                ),
+                child: SizedBox(
+                  width: 120,
+                  height: 100,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Custom child",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 100,
+              width: double.infinity,
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: Colors.grey.shade200),
+              ),
+            ),
+            Center(
+              child: MagicDropdown(
                 filterTitle: "Custom child with custom width",
                 customWidth: 400,
                 child: SizedBox(
