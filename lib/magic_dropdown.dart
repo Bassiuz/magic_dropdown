@@ -9,6 +9,11 @@ import 'package:magic_dropdown/widgets/magic_dropdown_single_select.dart';
 import 'menu_state.dart';
 import 'overlay_entries/overlay_entry_wrapper.dart';
 
+/// [MagicDropdown] is a magical Dropdown Widget with unlimited customization options rendering a dropdown just as you'd like.
+///
+/// [dropdownMode] defines the mode you are using the dropdown in. Single select or multiselect are functional by adding the onSelected functiont of [onSingleValueSelected] and [onMultiValueSelected] respectively.
+/// A custom child is rendered by providing it as [child]. [customWidth] and [height] are used to size the dropdown to your needs, while [animationDuration] sets a custom slide animation duration to your dropdown.
+/// with [filterTitle] you can give a title to your button and you can even provide a custom button yourself with [customButton].
 class MagicDropdown extends StatefulWidget {
   const MagicDropdown(
       {Key? key,
@@ -38,10 +43,10 @@ class MagicDropdown extends StatefulWidget {
   final DropdownMode dropdownMode;
 
   @override
-  MagicDropdownState createState() => MagicDropdownState();
+  State<MagicDropdown> createState() => _MagicDropdownState();
 }
 
-class MagicDropdownState extends State<MagicDropdown>
+class _MagicDropdownState extends State<MagicDropdown>
     with SingleTickerProviderStateMixin {
   OverlayEntry? _overlayEntry;
   OverlayEntry? _outsideClickDetector;

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// The [MagicDropdownMultiSelect] provides a standard way to render checkboxes in a list as a means to filter through your items.
+///
+/// All values and already selected values are provided with [selectableValues] and [selected] respectively. The [onChanged] handler returns all currently selected options after making a selection.
+/// With the [width] and [height], a custom sizing can be provided
 class MagicDropdownMultiSelect extends StatefulWidget {
   const MagicDropdownMultiSelect({
     Key? key,

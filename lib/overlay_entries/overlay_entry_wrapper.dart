@@ -4,6 +4,14 @@ import 'package:flutter/material.dart';
 
 import '../menu_state.dart';
 
+/// Renders the overlay linked to the button pressed and displaying the dropdown.
+///
+/// The [layerLink] maps this overlays positioned starting point to the origin of the button.
+/// The [heightOffset] is used to place the overlay exactly beneath the button
+/// The [width] and [fullHeight] are used as a way to give a custom sizing to the overlay
+/// The [child] is the widget rendered inside the overlay
+/// With the [animationDuration] the duration of the slide up/down is given. This is experimental.
+/// The [changeController] is used to listen to closing and opening events
 OverlayEntry createOverlayEntry({
   required LayerLink layerLink,
   required double heightOffset,
@@ -14,7 +22,7 @@ OverlayEntry createOverlayEntry({
   required StreamController<MenuState> changeController,
 }) {
   return OverlayEntry(
-      builder: (context) => OverlayEntryWrapper(
+      builder: (context) => _OverlayEntryWrapper(
             width: width,
             heightOffset: heightOffset,
             layerLink: layerLink,
@@ -25,8 +33,8 @@ OverlayEntry createOverlayEntry({
           ));
 }
 
-class OverlayEntryWrapper extends StatefulWidget {
-  const OverlayEntryWrapper({
+class _OverlayEntryWrapper extends StatefulWidget {
+  const _OverlayEntryWrapper({
     Key? key,
     required this.width,
     required this.heightOffset,
@@ -47,10 +55,10 @@ class OverlayEntryWrapper extends StatefulWidget {
   final StreamController<MenuState> changeController;
 
   @override
-  State<OverlayEntryWrapper> createState() => _OverlayEntryWrapperState();
+  State<_OverlayEntryWrapper> createState() => _OverlayEntryWrapperState();
 }
 
-class _OverlayEntryWrapperState extends State<OverlayEntryWrapper> {
+class _OverlayEntryWrapperState extends State<_OverlayEntryWrapper> {
   MenuState menuState = MenuState.closed;
   @override
   void initState() {

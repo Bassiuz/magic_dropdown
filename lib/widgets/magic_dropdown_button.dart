@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'dropdown_icon.dart';
 
+/// The default used button for the dropdown menu
+///
+/// [filterTitle] is the default text in the button. Provide an [animationController]
+/// to animate the icon inside the button
 class MagicDropdownButton extends StatelessWidget {
   const MagicDropdownButton(
       {Key? key, required this.animationController, required this.filterTitle})
@@ -11,7 +15,6 @@ class MagicDropdownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// The [MagicDropdownSingleSelect] provides a standard way to render checkboxes in a list as a means to filter through your items.
+///
+/// All values and already selected value are provided with [selectableValues] and [selected] respectively. The [onChanged] handler returns the currently selected option after making a selection.
+/// With the [width] and [height], a custom sizing can be provided
 class MagicDropdownSingleSelect extends StatefulWidget {
   const MagicDropdownSingleSelect(
       {Key? key,
