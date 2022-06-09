@@ -116,6 +116,27 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Center(
               child: MagicDropdown(
+                filterTitle: "Multi Selectable List With capped height",
+                dropdownMode: DropdownMode.multi,
+                height: 200,
+                selectableValues: const ["One", "Two", "Three", "Four", "Five"],
+                selectedValues: _selection3,
+                onMultiValueSelected: (List<String>? value) {
+                  setState(() {
+                    _selection3 = value!;
+                  });
+                },
+              ),
+            ),
+            SizedBox(
+              height: 100,
+              width: double.infinity,
+              child: DecoratedBox(
+                decoration: BoxDecoration(color: Colors.grey.shade200),
+              ),
+            ),
+            Center(
+              child: MagicDropdown(
                 filterTitle: "Multi Selectable List As Custom Child",
                 dropdownMode: DropdownMode.customChild,
                 child: Column(

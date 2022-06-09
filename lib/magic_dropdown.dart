@@ -139,6 +139,8 @@ class MagicDropdownState extends State<MagicDropdown>
             widget.onSingleValueSelected!(selection);
           }
         },
+        width: widget.customWidth,
+        height: widget.height,
         selected:
             widget.selectedValues.isNotEmpty ? widget.selectedValues[0] : null,
         selectableValues: widget.selectableValues!);
@@ -151,6 +153,8 @@ class MagicDropdownState extends State<MagicDropdown>
             widget.onMultiValueSelected!(selection);
           }
         },
+        width: widget.customWidth,
+        height: widget.height,
         selected: widget.selectedValues,
         selectableValues: widget.selectableValues!);
   }
