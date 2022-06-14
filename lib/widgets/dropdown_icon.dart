@@ -7,9 +7,13 @@ class DropdownIcon extends StatelessWidget {
   const DropdownIcon({Key? key, required this.controller}) : super(key: key);
   final AnimationController controller;
 
+  static const ValueKey translationKey =
+      ValueKey<String>('DropdownIconTranslation');
+
   @override
   Widget build(BuildContext context) {
     return RotationTransition(
+      key: translationKey,
       turns: Tween<double>(begin: 0, end: -0.5).animate(controller),
       child: const Icon(Icons.keyboard_arrow_down),
     );
