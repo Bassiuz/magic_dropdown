@@ -33,7 +33,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String? _selection;
-  String _selection2 = "Two";
+  String? _selection2 = "Two";
   List<String> _selection3 = ["Three", "Four"];
   List<String> _selection4 = ["Three", "Four"];
 
@@ -79,10 +79,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 filterTitle: "Single Selectable List With Preselection",
                 dropdownMode: DropdownMode.single,
                 selectableValues: const ["One", "Two", "Three", "Four", "Five"],
-                selectedValues: [_selection2],
+                selectedValues: _selection2 != null ? [_selection2!] : [],
                 onSingleValueSelected: (String? value) {
                   setState(() {
-                    _selection2 = value!;
+                    _selection2 = value;
                   });
                 },
               ),

@@ -36,7 +36,7 @@ class MagicDropdown extends StatefulWidget {
   final Duration animationDuration;
   final List<String>? selectableValues;
   final List<String> selectedValues;
-  final void Function(String)? onSingleValueSelected;
+  final void Function(String?)? onSingleValueSelected;
   final void Function(List<String>)? onMultiValueSelected;
   final Widget? customButton;
 
@@ -48,6 +48,7 @@ class MagicDropdown extends StatefulWidget {
 
 class _MagicDropdownState extends State<MagicDropdown>
     with SingleTickerProviderStateMixin {
+  List<String> selectedValues = [];
   OverlayEntry? _overlayEntry;
   OverlayEntry? _outsideClickDetector;
 
@@ -57,9 +58,15 @@ class _MagicDropdownState extends State<MagicDropdown>
   AnimationController? animationController;
   StreamController<MenuState>? changeController;
 
+  _MagicDropdownState();
+
   @override
   void initState() {
     super.initState();
+
+    setState(() {
+      selectedValues = widget.selectedValues;
+    });
 
     animationController = AnimationController(
       vsync: this,
@@ -145,11 +152,13 @@ class _MagicDropdownState extends State<MagicDropdown>
           if (widget.onSingleValueSelected != null) {
             widget.onSingleValueSelected!(selection);
           }
+          setState(() {
+            selectedValues = [selection];
+          });
         },
         width: widget.customWidth,
         height: widget.height,
-        selected:
-            widget.selectedValues.isNotEmpty ? widget.selectedValues[0] : null,
+        selected: selectedValues.isNotEmpty ? selectedValues[0] : null,
         selectableValues: widget.selectableValues!);
   }
 
@@ -159,10 +168,13 @@ class _MagicDropdownState extends State<MagicDropdown>
           if (widget.onMultiValueSelected != null) {
             widget.onMultiValueSelected!(selection);
           }
+          setState(() {
+            selectedValues = selection;
+          });
         },
         width: widget.customWidth,
         height: widget.height,
-        selected: widget.selectedValues,
+        selected: selectedValues,
         selectableValues: widget.selectableValues!);
   }
 
@@ -180,6 +192,16 @@ class _MagicDropdownState extends State<MagicDropdown>
               MagicDropdownButton(
                 filterTitle: widget.filterTitle,
                 animationController: animationController,
+                onRemoveSelection: () {
+                  widget.onSingleValueSelected!(null);
+                  setState(() {
+                    selectedValues = [];
+                  });
+                },
+                singleSelection: selectedValues.isNotEmpty &&
+                        widget.dropdownMode == DropdownMode.single
+                    ? selectedValues[0]
+                    : null,
               ),
         ),
       ),

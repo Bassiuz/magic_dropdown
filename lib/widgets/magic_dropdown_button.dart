@@ -8,10 +8,16 @@ import 'dropdown_icon.dart';
 /// to animate the icon inside the button
 class MagicDropdownButton extends StatelessWidget {
   const MagicDropdownButton(
-      {Key? key, required this.animationController, required this.filterTitle})
+      {Key? key,
+      required this.animationController,
+      required this.filterTitle,
+      this.singleSelection,
+      this.onRemoveSelection})
       : super(key: key);
   final AnimationController? animationController;
   final String filterTitle;
+  final String? singleSelection;
+  final Function? onRemoveSelection;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +27,15 @@ class MagicDropdownButton extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(filterTitle),
+            Text(singleSelection ?? filterTitle),
             const SizedBox(width: 16),
-            DropdownIcon(
-              controller: animationController!,
-            ),
+            singleSelection == null
+                ? DropdownIcon(
+                    controller: animationController!,
+                  )
+                : GestureDetector(
+                    onTap: () => onRemoveSelection?.call(),
+                    child: const Icon(Icons.close)),
           ],
         ),
       ),
