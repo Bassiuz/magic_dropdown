@@ -12,12 +12,14 @@ class MagicDropdownButton extends StatelessWidget {
       required this.animationController,
       required this.filterTitle,
       this.singleSelection,
-      this.onRemoveSelection})
+      this.onRemoveSelection,
+      this.clearable = true})
       : super(key: key);
   final AnimationController? animationController;
   final String filterTitle;
   final String? singleSelection;
   final Function? onRemoveSelection;
+  final bool clearable;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class MagicDropdownButton extends StatelessWidget {
           children: [
             Text(singleSelection ?? filterTitle),
             const SizedBox(width: 16),
-            singleSelection == null
+            singleSelection == null || !clearable
                 ? DropdownIcon(
                     controller: animationController!,
                   )

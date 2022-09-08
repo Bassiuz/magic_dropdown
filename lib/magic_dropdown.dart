@@ -27,7 +27,8 @@ class MagicDropdown extends StatefulWidget {
       this.onSingleValueSelected,
       this.onMultiValueSelected,
       this.dropdownMode = DropdownMode.customChild,
-      this.customButton})
+      this.customButton,
+      this.clearable = true})
       : super(key: key);
   final Widget? child;
   final double? customWidth;
@@ -39,6 +40,7 @@ class MagicDropdown extends StatefulWidget {
   final void Function(String?)? onSingleValueSelected;
   final void Function(List<String>)? onMultiValueSelected;
   final Widget? customButton;
+  final bool clearable;
 
   final DropdownMode dropdownMode;
 
@@ -48,7 +50,6 @@ class MagicDropdown extends StatefulWidget {
 
 class _MagicDropdownState extends State<MagicDropdown>
     with SingleTickerProviderStateMixin {
-  List<String> selectedValues = [];
   OverlayEntry? _overlayEntry;
   OverlayEntry? _outsideClickDetector;
 
@@ -63,10 +64,6 @@ class _MagicDropdownState extends State<MagicDropdown>
   @override
   void initState() {
     super.initState();
-
-    setState(() {
-      selectedValues = widget.selectedValues;
-    });
 
     animationController = AnimationController(
       vsync: this,
@@ -152,13 +149,11 @@ class _MagicDropdownState extends State<MagicDropdown>
           if (widget.onSingleValueSelected != null) {
             widget.onSingleValueSelected!(selection);
           }
-          setState(() {
-            selectedValues = [selection];
-          });
         },
         width: widget.customWidth,
         height: widget.height,
-        selected: selectedValues.isNotEmpty ? selectedValues[0] : null,
+        selected:
+            widget.selectedValues.isNotEmpty ? widget.selectedValues[0] : null,
         selectableValues: widget.selectableValues!);
   }
 
@@ -168,13 +163,10 @@ class _MagicDropdownState extends State<MagicDropdown>
           if (widget.onMultiValueSelected != null) {
             widget.onMultiValueSelected!(selection);
           }
-          setState(() {
-            selectedValues = selection;
-          });
         },
         width: widget.customWidth,
         height: widget.height,
-        selected: selectedValues,
+        selected: widget.selectedValues,
         selectableValues: widget.selectableValues!);
   }
 
@@ -192,15 +184,16 @@ class _MagicDropdownState extends State<MagicDropdown>
               MagicDropdownButton(
                 filterTitle: widget.filterTitle,
                 animationController: animationController,
+                clearable: widget.clearable,
                 onRemoveSelection: () {
+                  if (!widget.clearable) {
+                    return;
+                  }
                   widget.onSingleValueSelected!(null);
-                  setState(() {
-                    selectedValues = [];
-                  });
                 },
-                singleSelection: selectedValues.isNotEmpty &&
+                singleSelection: widget.selectedValues.isNotEmpty &&
                         widget.dropdownMode == DropdownMode.single
-                    ? selectedValues[0]
+                    ? widget.selectedValues[0]
                     : null,
               ),
         ),
